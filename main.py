@@ -74,4 +74,5 @@ def context_processor():
 
 
 
-app.run(debug=True)
+#app.run(debug=True)
+app.run()
