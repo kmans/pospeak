@@ -43,7 +43,8 @@ class CommentForm(Form):
 
 
 @app.route('/', methods=['GET', 'POST'])
-def index():
+@app.route('/<int:chatsession>', methods=['GET', 'POST'])
+def index(chatsession=0):
     form = CommentForm()
     if form.validate_on_submit():
         comment = Comment(
@@ -53,7 +54,7 @@ def index():
         db.session.add(comment)
         db.session.commit()
         flash("comment added on " + comment.timestamp.strftime('%Y-%m-%d %H:%M:%S'))
-        return redirect(url_for('index'))
+        return redirect(url_for('index', chatsession=chatsession))
     comments = Comment.query.order_by(db.desc(Comment.timestamp))
     return render_template('index.html', comments=comments, form=form)
 
