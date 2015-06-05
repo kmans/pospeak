@@ -41,9 +41,11 @@
 		        <div id="navbar" class="navbar-collapse collapse">
 		          
 		          <ul class="nav navbar-nav">
-		            <li class="active"><a href="{{ url_for('index') }}">Current Chat</a></li>
-		            <li><a href="{{ url_for('index') }}">New Chat</a></li>
+		            <li class="active"><a href="{{ url_for('index') }}">Room {{room}}</a></li>
+		            <li><a href="{{ url_for('index', room=new) }}">New Chat</a></li>
+		            <!-- placeholder, new = random for right now...
 		            <li><a href="{{ url_for('index') }}">Random Chat</a></li>
+		            -->
 		          </ul>
 
 				  <!-- right float 'profile' 
