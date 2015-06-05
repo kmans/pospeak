@@ -46,13 +46,14 @@
 		            <li><a href="{{ url_for('index') }}">Random Chat</a></li>
 		          </ul>
 
-				  <!-- right float 'profile' -->
+				  <!-- right float 'profile' 
    		    	  <ul class="nav nav-pills navbar-right" role="tablist">
 			        <li role="presentation" class="active"><a href="{{ url_for('index') }}">Home <span class="badge">42</span></a></li>
 			        <li role="presentation"><a href="{{ url_for('index') }}">Profile</a></li>
 			        <li role="presentation"><a href="{{ url_for('index') }}">Messages <span class="badge">3</span></a></li>
 
-					<!-- dynamic dropdown sign in -->
+					
+
 					<li class="dropdown">
                 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
                 		<ul class="dropdown-menu" role="menu">
@@ -74,12 +75,12 @@
                 		</ul>
               		</li>
 
-					<!-- end dynamic dropdown sign in -->
+					
 
 
 
 			      </ul>
-			      <!-- end right float 'profile -->'
+			      end right float 'profile -->
 
 
 		        </div><!--/.nav-collapse -->
@@ -113,7 +114,53 @@
 				<!-- /main -->
 			
 
-		</div>
+			</div>
+
+
+			<nav class="navbar navbar-default navbar-fixed-bottom">
+		      <div class="container">
+		        <div class="navbar-header">
+		        				  <!-- right float 'profile' -->
+   		    	  <ul class="nav nav-pills navbar-right" role="tablist">
+			        <li role="presentation" class="active"><a href="{{ url_for('index') }}">Home <span class="badge">42</span></a></li>
+			        <li role="presentation"><a href="{{ url_for('index') }}">Messages <span class="badge">3</span></a></li>
+
+					<!-- dynamic dropdown sign in -->
+					<li class="dropdown">
+                		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
+                		<ul class="dropdown-menu" role="menu">
+
+					      <form class="form-signin">
+					        <h2 class="form-signin-heading">&nbsp;Please sign in</h2>
+					        <label for="inputEmail" class="sr-only">Email address</label>
+					        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+					        <label for="inputPassword" class="sr-only">Password</label>
+					        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+					        <div class="checkbox">
+					          <label>
+					            <input type="checkbox" value="remember-me"> Remember me
+					          </label>
+					        </div>
+					        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+					      </form>
+
+                		</ul>
+              		</li>
+
+					<!-- end dynamic dropdown sign in -->
+
+
+
+			      </ul>
+			      <!-- end right float 'profile -->'
+		        </div>
+		      </div>
+		    </nav>
+
+
+
+
+
 
 
 	</body>
