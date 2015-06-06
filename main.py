@@ -73,8 +73,10 @@ def index(room='000000'):
         db.session.commit()
         flash("comment added on " + comment.timestamp.strftime('%Y-%m-%d %H:%M:%S') + " for room " + room)
         return redirect(url_for('index', room=room))
-    comments = Comment.query.order_by(db.desc(Comment.timestamp))
-    return render_template('index.html', comments=comments, form=form, room=room, new=createRoom())
+    
+    comments = Comment.query.filter_by(room=room).order_by(db.desc(Comment.timestamp))
+    ccount = comments.count()
+    return render_template('index.html', comments=comments, form=form, room=room, new=createRoom(), ccount=ccount)
 
 
 def static(path):

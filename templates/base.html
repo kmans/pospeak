@@ -41,7 +41,7 @@
 		        <div id="navbar" class="navbar-collapse collapse">
 		          
 		          <ul class="nav navbar-nav">
-		            <li class="active"><a href="{{ url_for('index') }}">Room {{room}}</a></li>
+		            <li class="active"><a href="{{ url_for('index') }}">Room: {{room}}</a></li>
 		            <li><a href="{{ url_for('index', room=new) }}">New Chat</a></li>
 		            <!-- placeholder, new = random for right now...
 		            <li><a href="{{ url_for('index') }}">Random Chat</a></li>
@@ -124,8 +124,9 @@
 		        <div class="navbar-header">
 		        				  <!-- right float 'profile' -->
    		    	  <ul class="nav nav-pills navbar-right" role="tablist">
-			        <li role="presentation" class="active"><a href="{{ url_for('index') }}">Home <span class="badge">42</span></a></li>
-			        <li role="presentation"><a href="{{ url_for('index') }}">Messages <span class="badge">3</span></a></li>
+
+			        <li role="presentation"><a href="{{ url_for('index') }}">Active Room: {{room}}</a></li>
+			        <li role="presentation"><a href="{{ url_for('index') }}">Messages <span class="badge">{{ ccount }}</span></a></li>
 
 					<!-- dynamic dropdown sign in -->
 					<li class="dropdown">
