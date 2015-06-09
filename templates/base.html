@@ -127,14 +127,20 @@
    		    	  <ul class="nav nav-pills navbar-right" role="tablist">
 
 			        <li role="presentation"><a href="{{ url_for('index') }}">Active Room: {{room}}</a></li>
-			        <li role="presentation"><a href="{{ url_for('index') }}">Messages <span class="badge">{{ ccount }}</span></a></li>
+			        {% if user is not none %}
+			        
+			        <li role="presentation"><a href="{{ url_for('index') }}">{{ session.email }} <span class="badge">{{ ccount }}</span></a></li>
+
+			        {% else %}
+			        <li role="presentation"><a href="{{ url_for('index') }}">Anonymous <span class="badge">{{ ccount }}</span></a></li>
+			        {% endif %}
 
 					<!-- dynamic dropdown sign in -->
 					<li class="dropdown">
                 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
                 		<ul class="dropdown-menu" role="menu">
 
-						<!-- start beta block
+						<!-- start beta block -->
 
 					      <form class="form-signin">
 					        <h2 class="form-signin-heading">&nbsp;Please sign in</h2>
@@ -149,12 +155,13 @@
 					        </div>
 					        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 					      </form>
-						 end beta block -->
+						 
+						 <!-- end beta block -->
 
-						<!-- login  -->
-						{% block login %}
-						{% endblock %}
-						<!-- /end login -->
+						<!-- login
+						{#% block login %#}
+						{#% endblock %#}
+						 /end login -->
 						
                 		</ul>
               		</li>
