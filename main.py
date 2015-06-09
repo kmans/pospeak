@@ -85,6 +85,7 @@ class CommentForm(Form):
     text = TextField('Comment', [validators.Required()])
 
 
+#In the future we will implement a username-type field...
 class UserForm(Form):
     email = TextField('Email Address', [validators.Required("Please enter your email address."), validators.Email("Please enter your email address")])
     password = PasswordField('Password', [validators.Required("Please enter a valid password")])
@@ -104,6 +105,43 @@ class UserForm(Form):
         else:
             return True
 
+#We only will require email address and password for logon, so we must create 
+#a new class for just this purpose
+class LoginForm(Form):
+    email = TextField('Email Address', [validators.Required("Please enter your email address."), validators.Email("Please enter your email address")])
+    password = PasswordField('Password', [validators.Required("Please enter a valid password")])
+    submit = SubmitField("Create account")
+
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+
+    def validate(self):
+        if not Form.validate(self):
+            return False
+     
+        user = User.query.filter_by(email = self.email.data.lower()).first()
+        if user and user.check_password(self.password.data):
+            return True
+        else:
+            self.email.errors.append("Invalid e-mail or password")
+            return False
+
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+  form = LoginForm()
+   
+  if request.method == 'POST':
+    if form.validate() == False:
+      return render_template('login.html', form=form)
+    else:
+      session['email'] = form.email.data
+      return redirect(url_for('index'))
+                 
+  elif request.method == 'GET':
+    return render_template('login.html', form=form)
+
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -111,7 +149,7 @@ def signup():
   form = UserForm()
    
   if request.method == 'POST':
-    if form.validate() == False:
+    if form.validate == False:
       return render_template('signup.html', form=form)
     else:
 
@@ -120,8 +158,10 @@ def signup():
         db.session.add(newuser)
         db.session.commit()
 
+
         session['email'] = newuser.email
 
+        flash("Successfully logged in!")
         return redirect(url_for('index'))
 
    
@@ -129,26 +169,6 @@ def signup():
     return render_template('signup.html', form=form)
 
 
-
-
-'''
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-
-    form = UserForm()
-    if form.validate_on_submit():
-        userdata = User(
-            form.email.data,
-            form.password.data,
-            form.remember.data
-        )
-        db.session.add(userdata)
-        db.session.commit()
-        flash("Successfully logged in!")
-        return redirect(url_for('index'))
-
-    return render_template('login.html', form=form)
-'''
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -173,7 +193,7 @@ def index(room='000000'):
         flash("comment added on " + comment.timestamp.strftime('%Y-%m-%d %H:%M:%S') + " for room " + room)
         return redirect(url_for('index', room=room))
     
-    comments = Comment.query.filter_by(room=room).order_by(db.desc(Comment.timestamp))
+    comments = Comment.query.filter_by(room=room).order_by(db.asc(Comment.timestamp))
     ccount = comments.count()
     return render_template('index.html', comments=comments, form=form, room=room, new=createRoom(), ccount=ccount, user=user)
 
