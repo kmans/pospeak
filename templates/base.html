@@ -5,6 +5,7 @@
 		<meta charset="utf-8">
 		<title>po/Speak</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -133,6 +134,8 @@
                 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
                 		<ul class="dropdown-menu" role="menu">
 
+						<!-- start beta block
+
 					      <form class="form-signin">
 					        <h2 class="form-signin-heading">&nbsp;Please sign in</h2>
 					        <label for="inputEmail" class="sr-only">Email address</label>
@@ -146,7 +149,13 @@
 					        </div>
 					        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 					      </form>
+						 end beta block -->
 
+						<!-- login  -->
+						{% block login %}
+						{% endblock %}
+						<!-- /end login -->
+						
                 		</ul>
               		</li>
 

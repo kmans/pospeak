@@ -9,9 +9,12 @@ import os
 #For db
 from flask.ext.sqlalchemy import SQLAlchemy
 
+#For user login / session management
+from flask.ext.login import LoginManager
+
 #WTForms / Flask-WTForms
 from flask.ext.wtf import Form
-from wtforms import TextField, validators
+from wtforms import TextField, PasswordField, BooleanField, validators
 
 import datetime
 import urlparse
@@ -23,16 +26,17 @@ app.config.update(
 	SECRET_KEY = '3ivwmZUQ5uJEpqI4YX99D05Q8IaLPz0o',
 	DEBUG = True,
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///pospeak.db',
+    SQLALCHEMY_BINDS = {
+    'users':        'sqlite:///users.db'
+    },
 	STATIC_ROOT = None
 	)
 
+#initialize SQLAlchemy db to work with our flask app
 db = SQLAlchemy(app)
-db.create_all()
 
 
-
-
-#primary db model
+#primary db model for Comments
 class Comment(db.Model):
     comment_id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
@@ -45,6 +49,20 @@ class Comment(db.Model):
         self.room = room
 
 
+#SQLAlchemy bind: 'users' // for login data - keep in separate DB
+class User(db.Model):
+    __bind_key__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(80), unique=True)
+    password = db.Column(db.String(80), nullable=False)
+    remember = db.Column(db.Boolean)
+
+
+#create all the databases
+db.create_all()
+
+#Do we need to commit here? Uncomment if we do.
+#db.session.commit()
 
 
 
@@ -53,15 +71,42 @@ def createRoom():
     return binascii.hexlify(os.urandom(3))
 
 
-#Form for the textfield
+#Form for the chatroom
 class CommentForm(Form):
     text = TextField('Comment', [validators.Required()])
+
+
+#Form for logging in (basic auth)
+class UserForm(Form):
+    email = TextField('Email Address', [validators.Required(), validators.Email()])
+    password = PasswordField('Password', [validators.Required()])
+    remember = BooleanField('Remember Me')
+
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+
+    form = UserForm()
+    if form.validate_on_submit():
+        userdata = User(
+            form.email.data,
+            form.password.data,
+            form.remember.data
+        )
+        db.session.add(userdata)
+        db.session.commit()
+        flash("Successfully logged in!")
+        return redirect(url_for('index'))
+
+    return render_template('login.html', form=form)
 
 
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/<room>', methods=['GET', 'POST'])
 def index(room='000000'):
+    
     form = CommentForm()
     if form.validate_on_submit():
         comment = Comment(
