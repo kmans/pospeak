@@ -6,16 +6,25 @@
 
     <br><br><br>
 
-    
     {% for comment in comments %}
         <blockquote>
             <p>{{ comment.text }}</p>
-            <small>{{ comment.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+            <footer>{{ comment.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</footer>
         </blockquote>
     {% endfor %}
+
+    {% for message in get_flashed_messages() %}
+        <div id="alert_message" class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <br><br><br><br>
+
+{% endblock %}
+
+{% block chatbox %}
     <form method="POST">
         {{ form.hidden_tag() }}
-        {{ render_field(form.text, label=False, class="input-xxlarge", autofocus="autofocus") }}
+        {{ render_field(form.text, label=False, class="form-control", autofocus="autofocus") }}
     </form>
 {% endblock %}
 

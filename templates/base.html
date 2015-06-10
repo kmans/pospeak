@@ -18,167 +18,152 @@
 		<link href="{{ static('favicon.ico') }}" rel="shortcut icon">
         <link href="{{ static('styles.css') }}" rel="stylesheet">
 
+		<!-- some jQuery to get elements to fade away -->
+		<script>
+        window.setTimeout(function() {
+  			$("#alert_message").fadeTo(500, 0).slideUp(500, function(){
+    			$(this).remove(); 
+  				});
+			}, 3000);
+		</script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+       
+	</head>
+	
+	<body>
+
+				
+			<div class="container-fluid">
+			<div class="row">
+			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+
+
+				<nav class="navbar navbar-default navbar-fixed-top">
+
+			        <div class="navbar-header">
+			          	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			            <span class="sr-only">Toggle navigation</span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+			          	</button>
+			          	<a class="navbar-brand" href="#">po/Speak #{{room}}</a>
+			        </div>
+
+		        	<div id="navbar" class="navbar-collapse collapse">
+		          
+			        	<ul class="nav navbar-nav">
+			            <li class="active"><a href="{{ url_for('index') }}">Current Room: {{room}}</a></li>
+			            <li><a href="{{ url_for('index', room=new) }}">New Chat</a></li>
+
+			          	</ul>
+
+					</div>
+
+		    	</nav>
+
+			</div>
+			</div>
+			</div>
+
+
+			<div class="container-fluid" >
+			<div class="row">
+			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+
+				<!-- content -->
+				
+
+	            {% block content %}
+	            {% endblock %}
+				
+				<!-- end of content -->
+			<div id="pagebottom"></div>
+			</div>
+			</div>
+			</div>
+
+
+			
+			
+			<div class="container-fluid">
+			<div class="row">
+			<div class="col-xs-12 col-sm-8">
+
+
+
+				<nav class="navbar navbar-default navbar-fixed-bottom">
+			        	
+			        	<span class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+						<ul class="navbar-form">
+							
+							{% block chatbox %}
+		            		{% endblock %}
+		            		
+	            		</ul>
+	            		</span>
+
+						<span class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<ul class="nav nav-tabs" role="tablist">
+	   		    		
+					        
+					        
+				        	{% if user is not none %}
+				                <li role="presentation"><a href="{{ url_for('index') }}">{{ session.email }} <span class="badge">{{ ccount }}</span></a></li>
+					        {% else %}
+						        <li role="presentation"><a href="{{ url_for('index') }}">Anonymous <span class="badge">{{ ccount }}</span></a></li>
+				        	{% endif %}
+
+
+							<li class="dropdown">
+	                		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
+	                			
+	                			<ul class="dropdown-menu" role="menu">
+								<!-- login -->
+
+							      	<form class="form-signin">
+							        
+								        <h2 class="form-signin-heading">&nbsp;Please sign in</h2>
+								        
+								        <label for="inputEmail" class="sr-only">Email address</label>
+								        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+								        
+								        <label for="inputPassword" class="sr-only">Password</label>
+								        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+								        
+								        <div class="checkbox">
+								        <label>
+								        <input type="checkbox" value="remember-me"> Remember me
+								        </label>
+								        </div>
+								        
+								        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+								      	
+							      	</form>
+							 
+							 	<!-- \login -->
+
+						
+                				</ul>
+              				</li>
+
+						</ul>
+						</span>
+			    </nav>
+			</div>
+			</div>
+			</div>
+
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-
-
-	</head>
-	<body>
-	<div class="container">
-
-
-			<div class="col-xs-6 col-sm-3 col-lg-3">
-
-			<!-- start nav menu -->
-		    <nav class="navbar navbar-default navbar-fixed-top">
-		      <div class="container">
-		        <div class="navbar-header">
-		          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-		            <span class="sr-only">Toggle navigation</span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		          </button>
-		          <a class="navbar-brand" href="#">po/Speak</a>
-		        </div>
-		        <div id="navbar" class="navbar-collapse collapse">
-		          
-		          <ul class="nav navbar-nav">
-		            <li class="active"><a href="{{ url_for('index') }}">Room: {{room}}</a></li>
-		            <li><a href="{{ url_for('index', room=new) }}">New Chat</a></li>
-		            <!-- placeholder, new = random for right now...
-		            <li><a href="{{ url_for('index') }}">Random Chat</a></li>
-		            -->
-		          </ul>
-
-				  <!-- right float 'profile' 
-   		    	  <ul class="nav nav-pills navbar-right" role="tablist">
-			        <li role="presentation" class="active"><a href="{{ url_for('index') }}">Home <span class="badge">42</span></a></li>
-			        <li role="presentation"><a href="{{ url_for('index') }}">Profile</a></li>
-			        <li role="presentation"><a href="{{ url_for('index') }}">Messages <span class="badge">3</span></a></li>
-
-					
-
-					<li class="dropdown">
-                		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
-                		<ul class="dropdown-menu" role="menu">
-
-					      <form class="form-signin">
-					        <h2 class="form-signin-heading">&nbsp;Please sign in</h2>
-					        <label for="inputEmail" class="sr-only">Email address</label>
-					        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-					        <label for="inputPassword" class="sr-only">Password</label>
-					        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-					        <div class="checkbox">
-					          <label>
-					            <input type="checkbox" value="remember-me"> Remember me
-					          </label>
-					        </div>
-					        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-					      </form>
-
-                		</ul>
-              		</li>
-
-					
-
-
-
-			      </ul>
-			      end right float 'profile -->
-
-
-		        </div><!--/.nav-collapse -->
-		      </div>
-		    </nav>
-			<!-- end nav menu -->
-			</div>
-
-
-			<div class="col-xs-6 col-sm-3 col-lg-3" id="main">
-						  
-							<!-- content -->
-							
-				            {% for message in get_flashed_messages() %}
-				                <div class="alert">{{ message }}</div>
-				            {% endfor %}
-				            {% block content %}
-				            {% endblock %}
-							
-							<!-- end of content -->
-						  
-			
-
-				<!-- /main -->
-			
-
-			</div>
-
-			
-			<div class="col-xs-6 col-sm-3 col-lg-3" id="main">
-			<nav class="navbar navbar-default navbar-fixed-bottom">
-		      <div class="container">
-		        <div class="navbar-header">
-		        				  <!-- right float 'profile' -->
-   		    	  <ul class="nav nav-pills navbar-right" role="tablist">
-
-			        <li role="presentation"><a href="{{ url_for('index') }}">Active Room: {{room}}</a></li>
-			        {% if user is not none %}
-			        
-			        <li role="presentation"><a href="{{ url_for('index') }}">{{ session.email }} <span class="badge">{{ ccount }}</span></a></li>
-
-			        {% else %}
-			        <li role="presentation"><a href="{{ url_for('index') }}">Anonymous <span class="badge">{{ ccount }}</span></a></li>
-			        {% endif %}
-
-					<!-- dynamic dropdown sign in -->
-					<li class="dropdown">
-                		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
-                		<ul class="dropdown-menu" role="menu">
-
-						<!-- start beta block -->
-
-					      <form class="form-signin">
-					        <h2 class="form-signin-heading">&nbsp;Please sign in</h2>
-					        <label for="inputEmail" class="sr-only">Email address</label>
-					        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-					        <label for="inputPassword" class="sr-only">Password</label>
-					        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-					        <div class="checkbox">
-					          <label>
-					            <input type="checkbox" value="remember-me"> Remember me
-					          </label>
-					        </div>
-					        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-					      </form>
-						 
-						 <!-- end beta block -->
-
-						<!-- login
-						{#% block login %#}
-						{#% endblock %#}
-						 /end login -->
-						
-                		</ul>
-              		</li>
-
-					<!-- end dynamic dropdown sign in -->
-
-
-
-			      </ul>
-			      <!-- end right float 'profile -->'
-		        </div>
-		      </div>
-		    </nav>
-
-
-
-	</div>
-
-
-
+		<script>
+		$(document).ready(function() {
+			$("html, body").animate({scrollTop: $("#pagebottom").offset().top});
+			});
+		</script>
+	
+	
 	</body>
 </html>

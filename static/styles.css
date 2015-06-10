@@ -10,10 +10,10 @@ html, body {
 
 
 
+
 a {
   color:#222222;
 }
-
 
 
 
@@ -78,7 +78,7 @@ a {
   margin-top:18px;
   height:70px;
   width:70px;
-}
+} 
 
 
 
@@ -104,14 +104,10 @@ h1,h2,h3 {
   letter-spacing:2px;
 }
 
-.col-sm-9.full {
-    width: 100%;
-}
 
-small.text-muted {
-  font-family:courier,courier-new,monospace;
+.navbar-form {
+  width: 100%;
 }
-
 
 .input-mini {
   width: 60px;
@@ -136,5 +132,6 @@ small.text-muted {
 .input-xxlarge {
   width: 530px;
 }
+
 
 
