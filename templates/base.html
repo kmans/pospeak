@@ -28,6 +28,8 @@
 		</script>
 
 
+
+
        
 	</head>
 	
@@ -35,8 +37,7 @@
 
 				
 			<div class="container-fluid">
-			<div class="row">
-			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+			<div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
 
 
 				<nav class="navbar navbar-default navbar-fixed-top">
@@ -65,12 +66,10 @@
 
 			</div>
 			</div>
-			</div>
 
 
 			<div class="container-fluid" >
-			<div class="row">
-			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+			<div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
 
 				<!-- content -->
 				
@@ -79,8 +78,7 @@
 	            {% endblock %}
 				
 				<!-- end of content -->
-			<div id="pagebottom"></div>
-			</div>
+			<div id="pagebottom"><br><br></div>
 			</div>
 			</div>
 
@@ -88,8 +86,6 @@
 			
 			
 			<div class="container-fluid">
-			<div class="row">
-			<div class="col-xs-12 col-sm-8">
 
 
 
@@ -104,7 +100,7 @@
 	            		</ul>
 	            		</span>
 
-						<span class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<span class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 						<ul class="nav nav-tabs" role="tablist">
 	   		    		
 					        
@@ -120,8 +116,9 @@
 	                		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
 	                			
 	                			<ul class="dropdown-menu" role="menu">
-								<!-- login -->
+								<!-- login
 
+								
 							      	<form class="form-signin">
 							        
 								        <h2 class="form-signin-heading">&nbsp;Please sign in</h2>
@@ -142,7 +139,9 @@
 								      	
 							      	</form>
 							 
-							 	<!-- \login -->
+							 	\login -->
+							 	{% block login %}
+							 	{% endblock %}
 
 						
                 				</ul>
@@ -152,8 +151,7 @@
 						</span>
 			    </nav>
 			</div>
-			</div>
-			</div>
+
 
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>

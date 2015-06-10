@@ -34,22 +34,25 @@
 
 {% block login %}
 
-    <form action="{{ url_for('login') }}" method="POST" class="form-signin">
-        <h2 class="form-signin-heading">&nbsp;Please sign in</h2>
-        
-        <label for="email" class="sr-only">Email address</label>
-        {{ render_field(form.email, class="form-control") }}
-        
-        <label for="password" class="sr-only">Password</label>
-        {{ render_field(form.password, class="form-control") }}
-        
-        <div class="checkbox">
-        <label>
-        {{ render_field(form.remember) }}
-        </label>
-        </div>
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <form action="{{ url_for('index') }}" method="post" class="form-signin">
+      
+            
+
+
+        {{ loginform.hidden_tag() }}
+              
+        {{ loginform.email.label }}
+        {{ loginform.email(class_='form-control', type='email') }}
+         
+        {{ loginform.password.label }}
+        {{ loginform.password(class_='form-control', type='password') }}
+         
+        {{ loginform.submit(class_='form-control', type='submit') }}
+                 
     </form>
+
+
+
+
 
 {% endblock %} 

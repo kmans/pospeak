@@ -110,7 +110,7 @@ class UserForm(Form):
 class LoginForm(Form):
     email = TextField('Email Address', [validators.Required("Please enter your email address."), validators.Email("Please enter your email address")])
     password = PasswordField('Password', [validators.Required("Please enter a valid password")])
-    submit = SubmitField("Create account")
+    submit = SubmitField("Login")
 
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
@@ -137,10 +137,24 @@ def login():
       return render_template('login.html', form=form)
     else:
       session['email'] = form.email.data
+      flash(form.email.data + " successfully logged in!")
       return redirect(url_for('index'))
                  
   elif request.method == 'GET':
     return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+def logout():
+ 
+  if 'email' not in session:
+    flash("Logout Successful")
+    return redirect(url_for('index'))
+     
+  session.pop('email', None)
+  flash("Logout Successful")
+  return redirect(url_for('index'))
+
 
 
 
@@ -161,7 +175,7 @@ def signup():
 
         session['email'] = newuser.email
 
-        flash("Successfully logged in!")
+        flash("Registration successful for " + form.email.data) 
         return redirect(url_for('index'))
 
    
@@ -192,10 +206,25 @@ def index(room='000000'):
         db.session.commit()
         flash("comment added on " + comment.timestamp.strftime('%Y-%m-%d %H:%M:%S') + " for room " + room)
         return redirect(url_for('index', room=room))
+
+
+    #start login form
+    loginform = LoginForm()
+    
+    if loginform.validate_on_submit() == False:
+        flash("Invalid Username or Password")
+    else:
+        session['email'] = loginform.email.data
+        flash(loginform.email.data + " successfully logged in!")
+        return redirect(url_for('index', room=room))
+                     
+    #end login form
+
+
     
     comments = Comment.query.filter_by(room=room).order_by(db.asc(Comment.timestamp))
     ccount = comments.count()
-    return render_template('index.html', comments=comments, form=form, room=room, new=createRoom(), ccount=ccount, user=user)
+    return render_template('index.html', comments=comments, form=form, loginform=loginform, room=room, new=createRoom(), ccount=ccount, user=user)
 
 
 def static(path):
