@@ -1,0 +1,43 @@
+{% from "util.html" import render_field %}
+
+{% extends "base.html" %}
+
+{% block content %}
+	
+	<br><br><br>
+	
+	<h3>Please register with your email address</h3>
+
+	{% for message in form.email.errors %}
+	<div class="flash">{{ message }}</div>
+	{% endfor %}
+
+	{% for message in form.password.errors %}
+	<div class="flash">{{ message }}</div>
+	{% endfor %}
+
+	<form action="{{ url_for('signup') }}" method="post" class="form-signin">
+	
+
+
+		{{ form.hidden_tag() }}
+	    
+	    <div class="form-group">      
+	    {{ form.email.label }}
+	    {{ form.email(class_='form-control', type='email') }}
+	    </div>
+
+	    <div class="form-group">       
+	    {{ form.password.label }}
+	    {{ form.password(class_='form-control', type='password')}}
+	    </div>
+
+	    {{ form.submit(class_='form-control', type='submit')}}
+
+	    <!--
+	    <button class="btn btn-sm btn-block" type="submit">Sign in</button>
+	    -->
+	         
+	</form>
+                        
+{% endblock %}

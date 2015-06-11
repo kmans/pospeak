@@ -3,14 +3,63 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form method="post">
-        {{ form.hidden_tag() }}
-        {{ render_field(form.text, label=False, class="input-xlarge", autofocus="autofocus") }}
-    </form>
+
+    <br><br><br>
+
     {% for comment in comments %}
         <blockquote>
             <p>{{ comment.text }}</p>
-            <small>{{ comment.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+            <footer>{{ comment.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</footer>
         </blockquote>
     {% endfor %}
+
+    {% for message in get_flashed_messages() %}
+        <div id="alert_message" class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <br><br><br><br>
+
 {% endblock %}
+
+{% block chatbox %}
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ render_field(form.text, label=False, class="form-control", autofocus="autofocus") }}
+    </form>
+{% endblock %}
+
+
+
+
+
+{% block login %}
+
+    <form action="{{ url_for('index') }}" method="post" class="form-signin">
+      
+        {% for message in loginform.email.errors %}
+        <div class="flash">{{ message }}</div>
+        {% endfor %}
+
+        {% for message in loginform.password.errors %}
+        <div class="flash">{{ message }}</div>
+        {% endfor %}            
+
+
+        {{ loginform.hidden_tag() }}
+
+        <div class="form-group">              
+        {{ loginform.email.label }}
+        {{ loginform.email(class_='form-control', type='email') }}
+        </div>
+         
+        <div class="form-group"> 
+        {{ loginform.password.label }}
+        {{ loginform.password(class_='form-control', type='password') }}
+        </div> 
+
+        {{ loginform.submit(class_='form-control', type='submit') }}
+                 
+    </form>
+
+
+{% endblock %} 
