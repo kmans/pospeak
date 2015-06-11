@@ -211,9 +211,7 @@ def index(room='000000'):
     #start login form
     loginform = LoginForm()
     
-    if loginform.validate_on_submit() == False:
-        flash("Invalid Username or Password")
-    else:
+    if loginform.validate_on_submit():
         session['email'] = loginform.email.data
         flash(loginform.email.data + " successfully logged in!")
         return redirect(url_for('index', room=room))

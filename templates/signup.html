@@ -3,9 +3,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- start beta block -->
-
-	<h2>Sign up</h2>
+	
+	<br><br><br>
+	
+	<h3>Please register with your email address</h3>
 
 	{% for message in form.email.errors %}
 	<div class="flash">{{ message }}</div>
@@ -15,10 +16,8 @@
 	<div class="flash">{{ message }}</div>
 	{% endfor %}
 
-	<form action="{{ url_for('signup') }}" method="post" class="form-inline">
-		
-
-
+	<form action="{{ url_for('signup') }}" method="post" class="form-signin">
+	
 
 
 		{{ form.hidden_tag() }}
@@ -41,5 +40,4 @@
 	         
 	</form>
                         
-<!-- end beta block -->
 {% endblock %}

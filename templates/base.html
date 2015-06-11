@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
+		<meta name="description" content="po/Speak">
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
 		<title>po/Speak</title>
@@ -9,9 +11,7 @@
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-
-
-        
+     
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" rel="stylesheet">
 
@@ -26,131 +26,96 @@
   				});
 			}, 3000);
 		</script>
-
-
-
-
-       
 	</head>
 	
 	<body>
-
 				
-			<div class="container-fluid">
-			<div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+		<div class="container-fluid">
+		<div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
 
 
-				<nav class="navbar navbar-default navbar-fixed-top">
+			<nav class="navbar navbar-default navbar-fixed-top">
 
-			        <div class="navbar-header">
-			          	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-			            <span class="sr-only">Toggle navigation</span>
-			            <span class="icon-bar"></span>
-			            <span class="icon-bar"></span>
-			            <span class="icon-bar"></span>
-			          	</button>
-			          	<a class="navbar-brand" href="#">po/Speak #{{room}}</a>
-			        </div>
+		        <div class="navbar-header">
+		          	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		            <span class="sr-only">Toggle navigation</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		          	</button>
+		          	<a class="navbar-brand" href="{{ url_for('index') }}">po/Speak #{{room}}</a>
+		        </div>
 
-		        	<div id="navbar" class="navbar-collapse collapse">
-		          
-			        	<ul class="nav navbar-nav">
-			            <li class="active"><a href="{{ url_for('index') }}">Current Room: {{room}}</a></li>
-			            <li><a href="{{ url_for('index', room=new) }}">New Chat</a></li>
+	        	<div id="navbar" class="navbar-collapse collapse">
+	          
+		        	<ul class="nav navbar-nav">
+		            <!-- <li class="active"><a href="{{ url_for('index') }}">Current Room: {{room}}</a></li> -->
+		            <li><a href="{{ url_for('index', room=new) }}">New Room</a></li>
 
-			          	</ul>
+		          	</ul>
 
-					</div>
+				</div>
 
-		    	</nav>
+	    	</nav>
 
-			</div>
-			</div>
-
-
-			<div class="container-fluid" >
-			<div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
-
-				<!-- content -->
-				
-
-	            {% block content %}
-	            {% endblock %}
-				
-				<!-- end of content -->
-			<div id="pagebottom"><br><br></div>
-			</div>
-			</div>
+		</div>
+		</div>
 
 
+		<div class="container-fluid" >
+		<div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+
+			<!-- content -->
 			
+
+            {% block content %}
+            {% endblock %}
 			
-			<div class="container-fluid">
+			<!-- end of content -->
+		<div id="pagebottom"><br><br></div>
+		</div>
+		</div>
 
 
+		
+		
+		<div class="container-fluid">
 
-				<nav class="navbar navbar-default navbar-fixed-bottom">
-			        	
-			        	<span class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-						<ul class="navbar-form">
-							
-							{% block chatbox %}
-		            		{% endblock %}
-		            		
-	            		</ul>
-	            		</span>
+			<nav class="navbar navbar-default navbar-fixed-bottom">
+		        	
+	        	<span class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+				<ul class="nav">
+					
+					{% block chatbox %}
+            		{% endblock %}
+            		
+        		</ul>
+        		</span>
 
-						<span class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-						<ul class="nav nav-tabs" role="tablist">
-	   		    		
-					        
-					        
-				        	{% if user is not none %}
-				                <li role="presentation"><a href="{{ url_for('index') }}">{{ session.email }} <span class="badge">{{ ccount }}</span></a></li>
-					        {% else %}
-						        <li role="presentation"><a href="{{ url_for('index') }}">Anonymous <span class="badge">{{ ccount }}</span></a></li>
-				        	{% endif %}
+				<span class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+				<ul class="nav nav-tabs" role="tablist">
+				    
+				      
+			      	{% if user is not none %}
+		          	<div>
+		          	<a href="#login" data-toggle="collapse" aria-expanded="false" aria-controls="login" class="btn btn-primary">{{ session.email }} &nbsp;<span class="badge">{{ ccount }}</span></a><a href="{{ url_for('logout') }}" class="btn btn-default">Logout</a>
+		          	</div>
+			       	{% else %}
+			       	<div>
+				    <a href="#login" data-toggle="collapse" aria-expanded="false" aria-controls="login"class="btn btn-primary">Anonymous &nbsp;<span class="badge">{{ ccount }}</span></a>
+				    <a href="{{ url_for('signup') }}" class="btn btn-default">Create Account</a>
+				    </div>
+		        	{% endif %}
+					
+					<div class="collapse well" id="login">
+					{% block login %}
+					{% endblock %}
+		      	   	</div>
 
-
-							<li class="dropdown">
-	                		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
-	                			
-	                			<ul class="dropdown-menu" role="menu">
-								<!-- login
-
-								
-							      	<form class="form-signin">
-							        
-								        <h2 class="form-signin-heading">&nbsp;Please sign in</h2>
-								        
-								        <label for="inputEmail" class="sr-only">Email address</label>
-								        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-								        
-								        <label for="inputPassword" class="sr-only">Password</label>
-								        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-								        
-								        <div class="checkbox">
-								        <label>
-								        <input type="checkbox" value="remember-me"> Remember me
-								        </label>
-								        </div>
-								        
-								        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-								      	
-							      	</form>
-							 
-							 	\login -->
-							 	{% block login %}
-							 	{% endblock %}
-
-						
-                				</ul>
-              				</li>
-
-						</ul>
-						</span>
-			    </nav>
-			</div>
+			  	</ul>
+				</span>
+		    </nav>
+		</div>
 
 
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -164,4 +129,5 @@
 	
 	
 	</body>
+
 </html>
