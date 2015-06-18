@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, flash, request, session
 
 from pospeakapp import app, db
-from pospeakapp.models import Comment, User, createRoom
+from pospeakapp.models import Comment, User, createRoom, make_url
 from pospeakapp.forms import CommentForm, UserForm, LoginForm
 
 import datetime
@@ -97,7 +97,7 @@ def signup():
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/<room>', methods=['GET', 'POST'])
-def index(room='000000'):
+def index(room='home'):
 
     #we first check if user has a session cookie and is logged in
     if 'email' in session:
@@ -137,7 +137,7 @@ def index(room='000000'):
         db.asc(Comment.timestamp))
     ccount = comments.count()
     return render_template('index.html', comments=comments, form=form, 
-                           room=room, new=createRoom(), ccount=ccount, user=user)
+                           room=room, new=createRoom(), ccount=ccount, user=user, url=make_url(room))
 
 
 def static(path):

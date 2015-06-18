@@ -1,12 +1,12 @@
-
 from pospeakapp import db
 from werkzeug import generate_password_hash, check_password_hash
 
-#We will use these for room generation until tinyurl is implemented
-import binascii
-import os
+#tinyurl will generate unique urls based on a positive integer value
 from tinyurl import encode_url, decode_url
 
+#we will use this to create our sharing hyperlinks
+from urlparse import urljoin
+from flask import request
 
 #primary db model for Comments
 class Comment(db.Model):
@@ -71,3 +71,6 @@ def createRoom():
         db.session.commit()
 
     return newroom.room
+
+def make_url(room):
+    return urljoin(request.url_root, room)
