@@ -31,9 +31,7 @@ v0.1 alpha - June 2015
 ###Bugs / Upcoming fixes
 
 #####Fixes coming in next update
-  - Fix UI/UX issues on the bottom navbar
   - Correctly authenticate users and send verification token emails
-  - Correctly implement 'tinyurl' module
   - Publish unit tests
 
 #####Fixes coming in future updates
