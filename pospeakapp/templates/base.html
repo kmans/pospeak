@@ -48,9 +48,16 @@
 
 	        	<div id="navbar" class="navbar-collapse collapse">
 	          
-		        	<ul class="nav navbar-nav">
+		        	<ul class="nav nav-pills">
 		            <!-- <li class="active"><a href="{{ url_for('index') }}">Current Room: {{room}}</a></li> -->
-		            <li><a href="{{ url_for('index', room=new) }}">New Room</a></li>
+		            <li><a href="{{ url_for('index', room=new) }}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>&nbsp;New Room</a></li>
+
+		            {% if user is not none %}
+					<li><a href="{{ url_for('logout') }}" class="btn btn-default">Logout</a></li>
+					{% else %}
+					<li><a href="{{ url_for('login') }}" class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a></li>
+				    <li><a href="{{ url_for('signup') }}" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;Sign Up</a></li>
+					{% endif %}
 
 		          	</ul>
 
@@ -95,22 +102,16 @@
 				<span class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 				<ul class="nav nav-tabs" role="tablist">
 				    
-				      
-			      	{% if user is not none %}
 		          	<div>
-		          	<a href="#login" data-toggle="collapse" aria-expanded="false" aria-controls="login" class="btn btn-primary">{{ session.email }} &nbsp;<span class="badge">{{ ccount }}</span></a><a href="{{ url_for('logout') }}" class="btn btn-default">Logout</a>
-		          	</div>
-			       	{% else %}
-			       	<div>
-				    <a href="#login" data-toggle="collapse" aria-expanded="false" aria-controls="login"class="btn btn-primary">Anonymous &nbsp;<span class="badge">{{ ccount }}</span></a>
-				    <a href="{{ url_for('signup') }}" class="btn btn-default">Create Account</a>
-				    </div>
-		        	{% endif %}
-					
-					<div class="collapse well" id="login">
-					{% block login %}
-					{% endblock %}
-		      	   	</div>
+		          	{% if user is not none %}
+		          	<a href="#" aria-expanded="false" aria-controls="login" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span>&nbsp;{{ user.email }}</a>
+		          	{% else %}
+		          	<a href="#" aria-expanded="false" aria-controls="login"class="btn btn-primary"><span class="glyphicon glyphicon-user"></span>&nbsp;Anonymous</a>
+		          	{% endif %}
+					<a href="#" aria-expanded="false" aria-controls="login"class="btn btn-secondary"><span class="glyphicon glyphicon-envelope"></span>&nbsp;<span class="badge">{{ ccount }}</span></a>
+		           	</div>
+
+
 
 			  	</ul>
 				</span>

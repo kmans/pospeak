@@ -10,6 +10,24 @@ import urlparse
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
+
+  #we first check if user has a session cookie and is logged in
+  if 'email' in session:
+      user = User.query.filter_by(email = session['email']).first()
+
+      #We implement a try/except catch here in the event we have a freshly
+      #created database and the user will be of type None with no email attr
+      try:
+        email = user.email
+      except AttributeError:
+        user = None
+        #email = "Anonymous"
+  
+  else:
+      user = None
+      #email = "Anonymous"
+
   form = LoginForm()
    
   if request.method == 'POST':
@@ -21,7 +39,7 @@ def login():
       return redirect(url_for('index'))
                  
   elif request.method == 'GET':
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, user=user)
 
 
 @app.route('/logout')
@@ -37,6 +55,23 @@ def logout():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+
+  #we first check if user has a session cookie and is logged in
+  if 'email' in session:
+      user = User.query.filter_by(email = session['email']).first()
+
+      #We implement a try/except catch here in the event we have a freshly
+      #created database and the user will be of type None with no email attr
+      try:
+        email = user.email
+      except AttributeError:
+        user = None
+        #email = "Anonymous"
+  
+  else:
+      user = None
+      #email = "Anonymous"
+
   form = UserForm()
    
   if request.method == 'POST':
@@ -57,9 +92,7 @@ def signup():
 
    
   elif request.method == 'GET':
-    return render_template('signup.html', form=form)
-
-
+    return render_template('signup.html', form=form, user=user)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -99,22 +132,11 @@ def index(room='000000'):
         return redirect(url_for('index', room=room))
 
 
-    #start login form
-    loginform = LoginForm()
-    
-    if loginform.validate_on_submit():
-        session['email'] = loginform.email.data
-        flash(loginform.email.data + " successfully logged in!")
-        return redirect(url_for('index', room=room))
-                     
-    #end login form
-
-
     
     comments = Comment.query.filter_by(room=room).order_by(
         db.asc(Comment.timestamp))
     ccount = comments.count()
-    return render_template('index.html', comments=comments, form=form, loginform=loginform, 
+    return render_template('index.html', comments=comments, form=form, 
                            room=room, new=createRoom(), ccount=ccount, user=user)
 
 

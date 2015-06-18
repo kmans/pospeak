@@ -5,7 +5,7 @@ from werkzeug import generate_password_hash, check_password_hash
 #We will use these for room generation until tinyurl is implemented
 import binascii
 import os
-#from tinyurl import encode_url, decode_url
+from tinyurl import encode_url, decode_url
 
 
 #primary db model for Comments
@@ -21,7 +21,6 @@ class Comment(db.Model):
         self.timestamp = timestamp
         self.room = room
         self.email = email
-
 
 #SQLAlchemy bind: 'users' // for login data - keep in separate DB
 class User(db.Model):
@@ -41,10 +40,34 @@ class User(db.Model):
         return check_password_hash(self.pwdhash, password)
 
 
+class Room(db.Model):
+    seq = db.Column(db.Integer, primary_key=True)
+    room = db.Column(db.String(10), nullable=False)
+    
+
+    def __init__(self, room):
+        self.room = room
+
+
 #we will need to call on tinyurl to generate a unique room for us...
 #we may need to separate this onto a new process/worker
 
+#def createRoom():
+#    return binascii.hexlify(os.urandom(3))
+
+
 def createRoom():
-    return binascii.hexlify(os.urandom(3))
 
 
+    try:
+        prevroom = Room.query.order_by(db.desc(Room.seq)).first()
+        newroom = Room(encode_url(prevroom.seq+1))
+        db.session.add(newroom)
+        db.session.commit()
+
+    except AttributeError:
+        newroom = Room(encode_url(1))
+        db.session.add(newroom)
+        db.session.commit()
+
+    return newroom.room
