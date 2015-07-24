@@ -5,7 +5,14 @@ from pospeakapp.models import Comment, User, createRoom, make_url
 from pospeakapp.forms import CommentForm, UserForm, LoginForm
 
 import datetime
-import urlparse
+
+#we will use this to create our sharing hyperlinks
+#try/except for Python 2 vs Python 3 import
+
+try: 
+    from urlparse import urljoin
+except: 
+    from urllib.parse import urljoin
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -149,7 +156,7 @@ def static(path):
     if root is None:
         return url_for('static', filename=path)
     else:
-        return urlparse.urljoin(root, path)
+        return urljoin(root, path)
 
 @app.context_processor
 def context_processor():

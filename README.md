@@ -8,6 +8,7 @@ The goal of this project was to create a way for people to communicate in groups
 #####tweet me [@supermansuri]
 <br>
 ### Version
+v0.11 - July 2015
 v0.1 alpha - June 2015
 
 ### Open Source Projects used in po/Speak
@@ -28,7 +29,11 @@ v0.1 alpha - June 2015
 - ```python run.py```
 - *test it out on localhost:5000*
 
-###Bugs / Upcoming fixes
+###Changelog/Future Updates
+
+#####Changelog
+  -v0.11 - Fixed Python3 compatibility, fixed user sign-off bug
+
 
 #####Fixes coming in next update
   - Correctly authenticate users and send verification token emails
