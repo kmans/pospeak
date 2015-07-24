@@ -1,3 +1,6 @@
+[![Build Status](https://api.travis-ci.org/kmans/pospeak.png)](https://travis-ci.org/kmans/pospeak)
+
+
 # po/Speak
 #####po/Speak is a mobile-first, instanced chat service engine specifically targeting users on limited data connections.
 #####It is built for the modern web, and works best on mobile devices running modern browsers. 
@@ -8,7 +11,7 @@ The goal of this project was to create a way for people to communicate in groups
 #####tweet me [@supermansuri]
 <br>
 ### Version
-v0.11 - July 2015
+v0.11 - July 2015<br>
 v0.1 alpha - June 2015
 
 ### Open Source Projects used in po/Speak
@@ -32,7 +35,7 @@ v0.1 alpha - June 2015
 ###Changelog/Future Updates
 
 #####Changelog
-  -v0.11 - Fixed Python3 compatibility, fixed user sign-off bug
+  - v0.11 - Fixed Python3 compatibility, fixed user sign-off bug
 
 
 #####Fixes coming in next update
