@@ -32,11 +32,11 @@ def login():
    
   if request.method == 'POST':
     if form.validate() == False:
-      return render_template('login.html', form=form)
+      return render_template('login.html', form=form, user=user)
     else:
       session['email'] = form.email.data
       flash(form.email.data + " successfully logged in!")
-      return redirect(url_for('index'))
+      return redirect(url_for('index', user=user))
                  
   elif request.method == 'GET':
     return render_template('login.html', form=form, user=user)
@@ -46,12 +46,16 @@ def login():
 def logout():
  
   if 'email' not in session:
+    user = None
     flash("Logout Successful")
-    return redirect(url_for('index'))
-     
-  session.pop('email', None)
-  flash("Logout Successful")
-  return redirect(url_for('index'))
+    return redirect(url_for('index', user=user))
+  
+  else:
+
+    session.pop('email', None)
+    user = None
+    flash("Logout Successful")
+    return redirect(url_for('index', user=user))
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
