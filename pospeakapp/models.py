@@ -5,7 +5,13 @@ from werkzeug import generate_password_hash, check_password_hash
 from pospeakapp.tinyurl import encode_url, decode_url
 
 #we will use this to create our sharing hyperlinks
-from urlparse import urljoin
+#try/except for Python 2 vs Python 3 import
+
+try: 
+    from urlparse import urljoin
+except: 
+    from urllib.parse import urljoin
+
 from flask import request
 
 #primary db model for Comments
