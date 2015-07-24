@@ -19,7 +19,7 @@ class _UrlEncoder(object):
         self.alphabet = alphabet
         self.block_size = block_size
         self.mask = (1 << block_size) - 1
-        self.mapping = range(block_size)
+        self.mapping = list(range(block_size).__reversed__())
         self.mapping.reverse()
     def encode_url(self, n, min_length=MIN_LENGTH):
         return self.enbase(self.encode(n), min_length)
