@@ -1,0 +1,163 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on https://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" href="stylesheets/github-dark.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>pospeak</title>
+  <meta name="description" content="po/Speak chat service engine alpha v1">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">pospeak</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">po/Speak chat service engine alpha v1</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/kmans/pospeak/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/kmans/pospeak/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/kmans/pospeak" class="code">View pospeak on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>
+<a id="pospeak" class="anchor" href="#pospeak" aria-hidden="true"><span class="octicon octicon-link"></span></a>po/Speak</h1>
+
+<h5>
+<a id="pospeak-is-a-mobile-first-instanced-chat-service-engine-specifically-targeting-users-on-limited-data-connections" class="anchor" href="#pospeak-is-a-mobile-first-instanced-chat-service-engine-specifically-targeting-users-on-limited-data-connections" aria-hidden="true"><span class="octicon octicon-link"></span></a>po/Speak is a mobile-first, instanced chat service engine specifically targeting users on limited data connections.</h5>
+
+<h5>
+<a id="it-is-built-for-the-modern-web-and-works-best-on-mobile-devices-running-modern-browsers" class="anchor" href="#it-is-built-for-the-modern-web-and-works-best-on-mobile-devices-running-modern-browsers" aria-hidden="true"><span class="octicon octicon-link"></span></a>It is built for the modern web, and works best on mobile devices running modern browsers.</h5>
+
+<p><br>
+The goal of this project was to create a way for people to communicate in groups without having to download an application or be tied down to a specific mobile device.</p>
+
+<h5>
+<a id="any-suggestions-or-ideas-on-how-to-improve-this-very-alpha-build-of-pospeak-are-much-appreciated" class="anchor" href="#any-suggestions-or-ideas-on-how-to-improve-this-very-alpha-build-of-pospeak-are-much-appreciated" aria-hidden="true"><span class="octicon octicon-link"></span></a>Any suggestions or ideas on how to improve this very alpha build of po/Speak are much appreciated!</h5>
+
+<h5>
+<a id="tweet-me-supermansuri" class="anchor" href="#tweet-me-supermansuri" aria-hidden="true"><span class="octicon octicon-link"></span></a>tweet me <a href="http://twitter.com/supermansuri">@supermansuri</a>
+</h5>
+
+<p><br></p>
+
+<h3>
+<a id="version" class="anchor" href="#version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Version</h3>
+
+<p>v0.1 alpha - June 2015</p>
+
+<h3>
+<a id="open-source-projects-used-in-pospeak" class="anchor" href="#open-source-projects-used-in-pospeak" aria-hidden="true"><span class="octicon octicon-link"></span></a>Open Source Projects used in po/Speak</h3>
+
+<ul>
+<li>
+<a href="http://flask.pocoo.org/">Flask</a> - Python Framework for getting all of this working</li>
+<li>
+<a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a> - for mobile/responsive design (HTML/CSS)</li>
+<li>
+<a href="http://jquery.com">jQuery</a> - for some of the animations</li>
+<li>
+<a href="http://gunicorn.org/">gunicorn</a> - recommended WSGI Server</li>
+<li>
+<a href="http://nginx.org/">nginx</a> - recommended HTTP proxy</li>
+<li>
+<a href="https://jenkins-ci.org/">jenkins</a> - wonderful CI tool</li>
+</ul>
+
+<h3>
+<a id="installationusage" class="anchor" href="#installationusage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation/Usage</h3>
+
+<h5>
+<a id="pospeak-has-been-tested-on-python-2710" class="anchor" href="#pospeak-has-been-tested-on-python-2710" aria-hidden="true"><span class="octicon octicon-link"></span></a>po/speak has been tested on Python 2.7.10</h5>
+
+<ul>
+<li><em>set a SECRET_KEY in the config.py file</em></li>
+<li><em>change DEBUG = False in config.py file if not testing</em></li>
+<li><code>pip install -r requirements.txt</code></li>
+<li><code>python run.py</code></li>
+<li><em>test it out on localhost:5000</em></li>
+</ul>
+
+<h3>
+<a id="bugs--upcoming-fixes" class="anchor" href="#bugs--upcoming-fixes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bugs / Upcoming fixes</h3>
+
+<h5>
+<a id="fixes-coming-in-next-update" class="anchor" href="#fixes-coming-in-next-update" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fixes coming in next update</h5>
+
+<ul>
+<li>Correctly authenticate users and send verification token emails</li>
+<li>Publish unit tests</li>
+</ul>
+
+<h5>
+<a id="fixes-coming-in-future-updates" class="anchor" href="#fixes-coming-in-future-updates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fixes coming in future updates</h5>
+
+<ul>
+<li>Implement websockets to replace POST requests</li>
+<li>Move over to using Postgres, and use memcache to handle session data</li>
+</ul>
+
+<h3>
+<a id="attribution-and-licensing" class="anchor" href="#attribution-and-licensing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attribution and Licensing</h3>
+
+<h5>
+<a id="pospeak-is-licensed-under-the-gpl-v30-" class="anchor" href="#pospeak-is-licensed-under-the-gpl-v30-" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>po/Speak is licensed under the GPL v3.0 </strong>
+</h5>
+
+<h5>
+<a id="c2015-kamil-mansuri" class="anchor" href="#c2015-kamil-mansuri" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>(c)2015 Kamil Mansuri</strong>
+</h5>
+
+<h5>
+<a id="supermansuri" class="anchor" href="#supermansuri" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><a href="http://twitter.com/supermansuri">@supermansuri</a></strong>
+</h5>
+
+<p><br></p>
+
+<h5>
+<a id="flask-is-licensed-under-the-bsd-license" class="anchor" href="#flask-is-licensed-under-the-bsd-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flask is licensed under the BSD license</h5>
+
+<h5>
+<a id="gunicorn-is-licensed-under-the-mit-license" class="anchor" href="#gunicorn-is-licensed-under-the-mit-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>gunicorn is licensed under the MIT license</h5>
+
+<h5>
+<a id="tinyurl-algorithm-is-based-on-the-work-of-michael-fogleman-and-is-licensed-under-the-mit-license" class="anchor" href="#tinyurl-algorithm-is-based-on-the-work-of-michael-fogleman-and-is-licensed-under-the-mit-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>tinyurl algorithm is based on the work of Michael Fogleman and is licensed under the MIT license</h5>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/kmans" class="avatar"><img src="https://avatars2.githubusercontent.com/u/8851513?v=3&amp;s=60" width="48" height="48"></a> <a href="https://github.com/kmans">kmans</a> maintains <a href="https://github.com/kmans/pospeak">pospeak</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/kmans/pospeak/tarball/master" class="tar">tar</a><a href="https://github.com/kmans/pospeak/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
