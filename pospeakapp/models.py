@@ -2,7 +2,7 @@ from pospeakapp import db
 from werkzeug import generate_password_hash, check_password_hash
 
 #tinyurl will generate unique urls based on a positive integer value
-from tinyurl import encode_url, decode_url
+from pospeakapp.tinyurl import encode_url, decode_url
 
 #we will use this to create our sharing hyperlinks
 from urlparse import urljoin
